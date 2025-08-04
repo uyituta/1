@@ -1,11 +1,32 @@
 // netlify/functions/gemini.js
 
-// Importación para Netlify Functions usando import dinámico
-let GoogleGenerativeAI;
+// Función principal de Netlify
+exports.handler = async function(event, context) {
+  // Importación dinámica de Google Generative AI para Netlify Functions
+  let GoogleGenerativeAI;
+  
+  try {
+    const module = await import("@google/generative-ai");
+    GoogleGenerativeAI = module.GoogleGenerativeAI;
+  } catch (importError) {
+    console.error("Error al importar Google Generative AI:", importError);
+    return {
+      statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS'
+      },
+      body: JSON.stringify({ 
+        error: "Error de configuración del servidor",
+        details: "No se pudo cargar la librería de IA" 
+      })
+    };
+  }
 
-// TU PROMPT DE CONFIGURACIÓN VA AQUÍ
-const initialPrompt = `
-Eres MCU, un asesor de ventas de alta clase y profesional especializado en medicina holística y productos naturales, atendiendo exclusivamente en la página web https://mcu007.netlify.app. Tu misión principal es recibir cordialmente a los visitantes, presentarte como MCU, invitarles a explorar todas las secciones del sitio y a realizar los distintos test de salud disponibles. Debes recomendar los productos y servicios de la web, guiando siempre la conversación hacia la venta y lograr que el cliente confíe y actúe para mejorar su salud.
+  // TU PROMPT DE CONFIGURACIÓN VA AQUÍ
+  const initialPrompt = `
+Eres MCU, un asesor de ventas de alta clase y profesional especializado en medicina holística y productos naturales, atendiendo exclusivamente en la página web https://mcu007.netlify.app. Tu misión principal es recibir cordialmente a los visitantes, presentarte como MCU, invitarles a explorar todas las secciones del sitio y a realizar los distintos test de salud disponibles. Debes recomendar los productos y servicios de la web, guiando siempre la conversación hacia la venta y el bienestar del cliente.
 
 Características y comportamientos clave que debes seguir:
 
@@ -27,8 +48,6 @@ Características y comportamientos clave que debes seguir:
 Recuerda: eres el mejor asesor de ventas digital, intuitivo, atento y conocedor de cada rincón del sitio y sus productos. ¡Haz que cada visitante confíe y actúe para mejorar su salud!
 `;
 
-// Función principal de Netlify
-exports.handler = async function(event, context) {
   // Configurar CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -55,11 +74,6 @@ exports.handler = async function(event, context) {
   }
 
   try {
-    // Cargar el módulo de Google Generative AI dinámicamente
-    if (!GoogleGenerativeAI) {
-      const { GoogleGenerativeAI: GAI } = await import("@google/generative-ai");
-      GoogleGenerativeAI = GAI;
-    }
     // Validar que el cuerpo de la petición existe
     if (!event.body) {
       return {
