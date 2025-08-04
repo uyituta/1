@@ -1,7 +1,7 @@
 // netlify/functions/gemini.js
 
-// Importación correcta para Netlify Functions
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+// Importación para Netlify Functions usando import dinámico
+let GoogleGenerativeAI;
 
 // TU PROMPT DE CONFIGURACIÓN VA AQUÍ
 const initialPrompt = `
@@ -55,6 +55,11 @@ exports.handler = async function(event, context) {
   }
 
   try {
+    // Cargar el módulo de Google Generative AI dinámicamente
+    if (!GoogleGenerativeAI) {
+      const { GoogleGenerativeAI: GAI } = await import("@google/generative-ai");
+      GoogleGenerativeAI = GAI;
+    }
     // Validar que el cuerpo de la petición existe
     if (!event.body) {
       return {
