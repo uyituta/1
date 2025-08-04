@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Necesidades Nutricionales - Natural Center of Urology</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
+            color: #343a40;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #2d5a27;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .header p {
+            color: #5a8a52;
+            font-style: italic;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid #5a8a52;
+        }
+        
+        h1, h2 {
+            color: #2d5a27;
+            text-align: center;
+        }
+        
+        .intro-text, .disclaimer {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #5a8a52;
+            padding: 20px;
+            background: #e8f5e8;
+            border-radius: 10px;
+        }
+        
+        .disclaimer {
+            font-style: italic;
+            font-size: 0.95em;
+            border-left: 4px solid #2d5a27;
+            color: #2d5a27;
+        }
+        
+        .question-group {
+            margin-bottom: 35px;
+            border-top: 3px solid #e8f5e8;
+            padding-top: 25px;
+        }
+        
+        .question-group h3 {
+            color: #2d5a27;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .question p {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 20px 0 15px 0;
+            color: #2d5a27;
+        }
+        
+        .options label {
+            display: block;
+            background: #f8fffe;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e8f5e8;
+        }
+        
+        .options label:hover {
+            background: #e8f5e8;
+            border-color: #5a8a52;
+            transform: translateX(10px);
+        }
+        
+        .options input[type="radio"], .options input[type="checkbox"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+        
+        .age-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #e8f5e8;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background: #f8fffe;
+            transition: all 0.3s ease;
+        }
+        
+        .age-input:focus {
+            border-color: #2d5a27;
+            outline: none;
+            background: white;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #2d5a27, #5a8a52);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.3em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 30px;
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #5a8a52, #2d5a27);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(45, 90, 39, 0.4);
+        }
+        
+        #results {
+            margin-top: 40px;
+            padding: 30px;
+            display: none;
+            animation: fadeIn 1s;
+            background: #e8f5e8;
+            border-radius: 15px;
+            border-left: 8px solid #2d5a27;
+        }
+        
+        .result-card {
+            background: white;
+            border-left: 6px solid #2d5a27;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .result-card h4 {
+            color: #2d5a27;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .result-card p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #2d5a27;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-button:hover {
+            background: #3d6a37;
+            transform: scale(1.05);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .question-group {
+                margin-bottom: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Volver</a>
+    
+    <div class="header">
+        <h1>Natural Center of Urology</h1>
+        <p>Test Personalizado de Nutrientes</p>
+    </div>
+
+    <div class="container">
+        <h1>Test Personalizado de Nutrientes</h1>
+        <p class="intro-text">Descubre qué vitaminas, minerales y otros compuestos naturales podrían beneficiar a tu cuerpo según tu edad, dieta y estilo de vida.</p>
+        <p class="disclaimer"><strong>Importante:</strong> Este test es una herramienta orientativa y educativa. No reemplaza el diagnóstico ni la recomendación de un profesional de la salud.</p>
+
+        <form id="nutrient-test">
+            <div class="question-group">
+                <h3>📋 Información Básica</h3>
+                <div class="question">
+                    <p>1. ¿Cuál es tu edad?</p>
+                    <input type="number" id="age" class="age-input" placeholder="Ej: 35" required>
+                </div>
+                 <div class="question">
+                    <p>2. ¿Sigues alguna de estas dietas?</p>
+                     <div class="options">
+                        <label><input type="radio" name="q_diet" value="vegan"> Vegetariana estricta o vegana</label>
+                        <label><input type="radio" name="q_diet" value="low_meat"> Como poca carne roja</label>
+                        <label><input type="radio" name="q_diet" value="none" checked> Ninguna en particular, como de todo</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>⚡ Energía y Estado de Ánimo</h3>
+                <p>3. ¿Con qué frecuencia te sientes fatigado o sin energía sin razón aparente?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_fatigue" value="2"> Casi todos los días</label>
+                    <label><input type="radio" name="q_fatigue" value="1"> Varias veces a la semana</label>
+                    <label><input type="radio" name="q_fatigue" value="0"> Raramente</label>
+                </div>
+                <p>4. ¿Sueles tener las manos o los pies fríos, incluso en ambientes cálidos?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_cold" value="1"> Sí, frecuentemente</label>
+                    <label><input type="radio" name="q_cold" value="0"> No, raramente</label>
+                </div>
+                <p>5. ¿Has notado cambios en tu estado de ánimo o te sientes deprimido con frecuencia?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_mood" value="2"> Sí, frecuentemente</label>
+                    <label><input type="radio" name="q_mood" value="1"> Ocasionalmente</label>
+                    <label><input type="radio" name="q_mood" value="0"> Raramente</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>🦴 Salud Ósea y Muscular</h3>
+                <p>6. ¿Tienes dolor en huesos o articulaciones con frecuencia?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_bones" value="2"> Sí, frecuentemente</label>
+                    <label><input type="radio" name="q_bones" value="1"> Ocasionalmente</label>
+                    <label><input type="radio" name="q_bones" value="0"> Raramente</label>
+                </div>
+                <p>7. ¿Sientes debilidad muscular o calambres?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_muscle" value="2"> Sí, frecuentemente</label>
+                    <label><input type="radio" name="q_muscle" value="1"> Ocasionalmente</label>
+                    <label><input type="radio" name="q_muscle" value="0"> Raramente</label>
+                </div>
+                <p>8. ¿Cuánto tiempo pasas al sol semanalmente?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_sun" value="0"> Más de 2 horas por semana</label>
+                    <label><input type="radio" name="q_sun" value="1"> 30 minutos a 2 horas por semana</label>
+                    <label><input type="radio" name="q_sun" value="2"> Menos de 30 minutos por semana</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>🩸 Salud Cardiovascular</h3>
+                <p>9. ¿Te sientes mareado al levantarte rápidamente?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_dizzy" value="1"> Sí, frecuentemente</label>
+                    <label><input type="radio" name="q_dizzy" value="0"> No, raramente</label>
+                </div>
+                <p>10. ¿Tienes la piel pálida o te han dicho que te ves pálido?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_pale" value="1"> Sí</label>
+                    <label><input type="radio" name="q_pale" value="0"> No</label>
+                </div>
+                <p>11. ¿Sientes el corazón acelerado sin hacer ejercicio?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_heart" value="1"> Sí, frecuentemente</label>
+                    <label><input type="radio" name="q_heart" value="0"> No, raramente</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>🧠 Función Cognitiva</h3>
+                <p>12. ¿Tienes dificultades para concentrarte o problemas de memoria?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_focus" value="2"> Sí, frecuentemente</label>
+                    <label><input type="radio" name="q_focus" value="1"> Ocasionalmente</label>
+                    <label><input type="radio" name="q_focus" value="0"> Raramente</label>
+                </div>
+                <p>13. ¿Tienes problemas para dormir o insomnio?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_sleep" value="2"> Sí, frecuentemente</label>
+                    <label><input type="radio" name="q_sleep" value="1"> Ocasionalmente</label>
+                    <label><input type="radio" name="q_sleep" value="0"> Raramente</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>🍎 Hábitos Alimenticios</h3>
+                <p>14. ¿Consumes frutas y verduras diariamente?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_fruits" value="0"> 5 o más porciones al día</label>
+                    <label><input type="radio" name="q_fruits" value="1"> 2-4 porciones al día</label>
+                    <label><input type="radio" name="q_fruits" value="2"> Menos de 2 porciones al día</label>
+                </div>
+                <p>15. ¿Con qué frecuencia comes pescado?</p>
+                <div class="options">
+                    <label><input type="radio" name="q_fish" value="0"> 2 o más veces por semana</label>
+                    <label><input type="radio" name="q_fish" value="1"> Una vez por semana</label>
+                    <label><input type="radio" name="q_fish" value="2"> Menos de una vez por semana o nunca</label>
+                </div>
+            </div>
+
+            <button type="submit">Obtener Mis Recomendaciones Nutricionales</button>
+        </form>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('nutrient-test');
+            form.addEventListener('submit', handleSubmit);
+        });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const age = parseInt(document.getElementById('age').value);
+            
+            if (!age || age < 1 || age > 120) {
+                alert('Por favor, ingresa una edad válida.');
+                return;
+            }
+            
+            const results = analyzeNutrientNeeds(formData, age);
+            displayResults(results);
+        }
+
+        function analyzeNutrientNeeds(formData, age) {
+            const recommendations = [];
+            
+            // Age-based recommendations
+            if (age >= 50) {
+                recommendations.push({
+                    nutrient: "Vitamina B12",
+                    reason: "A partir de los 50 años, la absorción de B12 disminuye",
+                    benefits: "Mejora la energía, función cerebral y formación de glóbulos rojos",
+                    sources: "Carnes, pescado, lácteos, alimentos fortificados"
+                });
+                
+                recommendations.push({
+                    nutrient: "Vitamina D",
+                    reason: "La síntesis de vitamina D disminuye con la edad",
+                    benefits: "Salud ósea, sistema inmune, función muscular",
+                    sources: "Exposición solar, pescados grasos, suplementos"
+                });
+            }
+            
+            if (age >= 65) {
+                recommendations.push({
+                    nutrient: "Calcio",
+                    reason: "Mayor riesgo de osteoporosis en edad avanzada",
+                    benefits: "Mantiene huesos fuertes y función muscular",
+                    sources: "Lácteos, vegetales de hoja verde, sardinas"
+                });
+            }
+            
+            // Diet-based recommendations
+            const diet = formData.get('q_diet');
+            if (diet === 'vegan') {
+                recommendations.push({
+                    nutrient: "Vitamina B12",
+                    reason: "Dieta vegana estricta",
+                    benefits: "Esencial para función neurológica y formación de sangre",
+                    sources: "Suplementos, alimentos fortificados"
+                });
+                
+                recommendations.push({
+                    nutrient: "Hierro",
+                    reason: "El hierro vegetal se absorbe menos que el animal",
+                    benefits: "Previene anemia, mejora energía",
+                    sources: "Legumbres, espinacas, frutos secos, con vitamina C"
+                });
+                
+                recommendations.push({
+                    nutrient: "Omega-3 (DHA/EPA)",
+                    reason: "Limitado en dietas vegetales",
+                    benefits: "Salud cardiovascular y cerebral",
+                    sources: "Algas, aceite de algas, nueces"
+                });
+            }
+            
+            if (diet === 'low_meat') {
+                recommendations.push({
+                    nutrient: "Hierro",
+                    reason: "Consumo limitado de carne roja",
+                    benefits: "Previene anemia por deficiencia de hierro",
+                    sources: "Carnes magras, pescado, legumbres, cereales fortificados"
+                });
+            }
+            
+            // Symptom-based recommendations
+            const fatigue = parseInt(formData.get('q_fatigue') || 0);
+            if (fatigue >= 1) {
+                recommendations.push({
+                    nutrient: "Hierro",
+                    reason: "Fatiga frecuente puede indicar deficiencia de hierro",
+                    benefits: "Mejora energía y reduce cansancio",
+                    sources: "Carnes rojas, pescado, legumbres, espinacas"
+                });
+                
+                recommendations.push({
+                    nutrient: "Complejo B",
+                    reason: "Las vitaminas B son esenciales para la energía",
+                    benefits: "Metabolismo energético, función neurológica",
+                    sources: "Cereales integrales, carnes, huevos, verduras"
+                });
+            }
+            
+            const mood = parseInt(formData.get('q_mood') || 0);
+            if (mood >= 1) {
+                recommendations.push({
+                    nutrient: "Vitamina D",
+                    reason: "Deficiencia asociada con depresión y mal humor",
+                    benefits: "Mejora estado de ánimo y función cerebral",
+                    sources: "Sol, pescados grasos, suplementos"
+                });
+                
+                recommendations.push({
+                    nutrient: "Omega-3",
+                    reason: "Importante para salud mental y estado de ánimo",
+                    benefits: "Reduce inflamación, mejora función cerebral",
+                    sources: "Pescados grasos, nueces, aceite de pescado"
+                });
+            }
+            
+            const bones = parseInt(formData.get('q_bones') || 0);
+            if (bones >= 1) {
+                recommendations.push({
+                    nutrient: "Calcio",
+                    reason: "Dolor en huesos puede indicar deficiencia",
+                    benefits: "Fortalece huesos y dientes",
+                    sources: "Lácteos, sardinas, brócoli, almendras"
+                });
+                
+                recommendations.push({
+                    nutrient: "Magnesio",
+                    reason: "Importante para salud ósea y muscular",
+                    benefits: "Reduce calambres, mejora función muscular",
+                    sources: "Frutos secos, semillas, chocolate negro, vegetales"
+                });
+            }
+            
+            const sun = parseInt(formData.get('q_sun') || 0);
+            if (sun >= 1) {
+                recommendations.push({
+                    nutrient: "Vitamina D",
+                    reason: "Exposición solar limitada",
+                    benefits: "Salud ósea, sistema inmune, estado de ánimo",
+                    sources: "Suplementos, pescados grasos, alimentos fortificados"
+                });
+            }
+            
+            const pale = parseInt(formData.get('q_pale') || 0);
+            const dizzy = parseInt(formData.get('q_dizzy') || 0);
+            if (pale >= 1 || dizzy >= 1) {
+                recommendations.push({
+                    nutrient: "Hierro",
+                    reason: "Palidez y mareos pueden indicar anemia",
+                    benefits: "Mejora oxigenación, reduce fatiga",
+                    sources: "Carnes rojas, hígado, espinacas, lentejas"
+                });
+            }
+            
+            const focus = parseInt(formData.get('q_focus') || 0);
+            if (focus >= 1) {
+                recommendations.push({
+                    nutrient: "Omega-3 DHA",
+                    reason: "Esencial para función cerebral y memoria",
+                    benefits: "Mejora concentración y memoria",
+                    sources: "Pescados grasos, aceite de pescado, algas"
+                });
+            }
+            
+            const fruits = parseInt(formData.get('q_fruits') || 0);
+            if (fruits >= 1) {
+                recommendations.push({
+                    nutrient: "Vitamina C",
+                    reason: "Consumo insuficiente de frutas y verduras",
+                    benefits: "Antioxidante, sistema inmune, absorción de hierro",
+                    sources: "Cítricos, fresas, pimientos, brócoli"
+                });
+            }
+            
+            const fish = parseInt(formData.get('q_fish') || 0);
+            if (fish >= 1) {
+                recommendations.push({
+                    nutrient: "Omega-3",
+                    reason: "Consumo limitado de pescado",
+                    benefits: "Salud cardiovascular, función cerebral",
+                    sources: "Pescados grasos, aceite de pescado, nueces"
+                });
+            }
+            
+            // Remove duplicates and limit to top recommendations
+            const uniqueRecommendations = recommendations.filter((item, index, self) =>
+                index === self.findIndex(t => t.nutrient === item.nutrient)
+            );
+            
+            return uniqueRecommendations.slice(0, 8); // Top 8 recommendations
+        }
+
+        function displayResults(recommendations) {
+            const resultsDiv = document.getElementById('results');
+            
+            let content = `
+                <h2>🎯 Tus Recomendaciones Nutricionales Personalizadas</h2>
+                <p style="text-align: center; margin-bottom: 30px; font-size: 1.1em;">
+                    Basado en tu edad, dieta y síntomas, estos nutrientes podrían beneficiarte:
+                </p>
+            `;
+            
+            recommendations.forEach((rec, index) => {
+                content += `
+                    <div class="result-card">
+                        <h4>${index + 1}. ${rec.nutrient}</h4>
+                        <p><strong>¿Por qué lo necesitas?</strong> ${rec.reason}</p>
+                        <p><strong>Beneficios:</strong> ${rec.benefits}</p>
+                        <p><strong>Fuentes naturales:</strong> ${rec.sources}</p>
+                    </div>
+                `;
+            });
+            
+            content += `
+                <div class="result-card" style="border-left-color: #e74c3c; background: #fff5f5;">
+                    <h4>⚠️ Recomendaciones Generales</h4>
+                    <p><strong>Antes de tomar suplementos:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Consulta con un profesional de la salud</li>
+                        <li>Considera análisis de sangre para confirmar deficiencias</li>
+                        <li>Prioriza siempre una dieta balanceada</li>
+                        <li>Lee las etiquetas y dosificaciones recomendadas</li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px; padding: 20px; background: white; border-radius: 10px;">
+                    <h4 style="color: #2d5a27;">🌿 Productos Naturales Recomendados</h4>
+                    <p>En Natural Center of Urology ofrecemos suplementos naturales de alta calidad que pueden ayudarte a cubrir estas necesidades nutricionales de forma segura y efectiva.</p>
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = content;
+            resultsDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    </script>
+</body>
+</html>

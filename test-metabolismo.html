@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Metabolismo Avanzado - Natural Center of Urology</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #2d5a27;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .header p {
+            color: #5a8a52;
+            font-style: italic;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid #5a8a52;
+        }
+        
+        h1, h2 {
+            color: #2d5a27;
+            text-align: center;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            border-left: 4px solid #5a8a52;
+            padding-left: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+            background: #f8fffe;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .question p {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d5a27;
+        }
+        
+        .options label {
+            display: block;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e8f5e8;
+        }
+        
+        .options label:hover {
+            background: #e8f5e8;
+            transform: translateX(10px);
+            border-color: #5a8a52;
+        }
+        
+        .options input[type="radio"] {
+            display: none;
+        }
+        
+        .options input[type="radio"]:checked + span {
+            font-weight: bold;
+            color: #2d5a27;
+        }
+        
+        .options label:has(input:checked) {
+            background: #e8f5e8;
+            border-color: #2d5a27;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #2d5a27, #5a8a52);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #5a8a52, #2d5a27);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(45, 90, 39, 0.3);
+        }
+        
+        #results {
+            margin-top: 40px;
+            padding: 40px;
+            background: #e8f5e8;
+            border-radius: 15px;
+            text-align: left;
+            display: none;
+            border-left: 8px solid #2d5a27;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        #results h2 {
+            color: #2d5a27;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+        
+        #results ul {
+            list-style-type: '✔ ';
+            padding-left: 25px;
+        }
+        
+        #results li {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #2d5a27;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-button:hover {
+            background: #3d6a37;
+            transform: scale(1.05);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .question {
+                padding: 15px;
+            }
+            
+            .question p {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Volver</a>
+    
+    <div class="header">
+        <h1>Natural Center of Urology</h1>
+        <p>Test de Metabolismo Avanzado</p>
+    </div>
+
+    <div class="container">
+        <h1>Test de Metabolismo Avanzado</h1>
+        <p style="text-align: center; color: #5a8a52; font-size: 1.1em;">Esta versión más completa te ayudará a identificar con mayor precisión tu tipo de metabolismo. Responde con sinceridad para obtener el mejor resultado.</p>
+        <hr style="border: 2px solid #e8f5e8; margin: 30px 0;">
+
+        <form id="metabolism-test">
+            <div class="question">
+                <p>1. ¿Cómo describirías la estructura general de tu cuerpo?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="a"> <span>Naturalmente delgado, con extremidades largas y articulaciones finas.</span></label>
+                    <label><input type="radio" name="q1" value="b"> <span>Estructura atlética, hombros más anchos que las caderas, musculatura definida.</span></label>
+                    <label><input type="radio" name="q1" value="c"> <span>Constitución robusta y ancha, con tendencia a una figura más redondeada.</span></label>
+                </div>
+            </div>
+            <div class="question">
+                <p>2. Respecto a tu peso corporal, ¿qué afirmación te describe mejor?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="a"> <span>Me es muy difícil ganar peso, aunque coma bastante.</span></label>
+                    <label><input type="radio" name="q2" value="b"> <span>Puedo ganar o perder peso si me lo propongo, con relativa facilidad.</span></label>
+                    <label><input type="radio" name="q2" value="c"> <span>Gano peso con mucha facilidad y me cuesta horrores perderlo.</span></label>
+                </div>
+            </div>
+            <div class="question">
+                <p>3. ¿Cómo es tu nivel de energía durante el día?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="a"> <span>Tengo picos de energía, a menudo me siento inquieto o nervioso.</span></label>
+                    <label><input type="radio" name="q3" value="b"> <span>Mis niveles de energía son estables y consistentes durante todo el día.</span></label>
+                    <label><input type="radio" name="q3" value="c"> <span>A menudo me siento cansado o con poca energía, especialmente después de comer.</span></label>
+                </div>
+            </div>
+            <div class="question">
+                <p>4. ¿Qué tipo de antojos sueles tener?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="a"> <span>No suelo tener muchos antojos, mi apetito es variable.</span></label>
+                    <label><input type="radio" name="q4" value="b"> <span>Antojos moderados, generalmente de alimentos salados o proteínas.</span></label>
+                    <label><input type="radio" name="q4" value="c"> <span>Antojos frecuentes e intensos, especialmente de dulces y carbohidratos.</span></label>
+                </div>
+            </div>
+            <div class="question">
+                <p>5. ¿Cómo respondes al ejercicio físico?</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="a"> <span>Me resulta difícil ganar músculo, pero tengo buena resistencia cardiovascular.</span></label>
+                    <label><input type="radio" name="q5" value="b"> <span>Gano músculo y fuerza con relativa facilidad, buena respuesta al entrenamiento.</span></label>
+                    <label><input type="radio" name="q5" value="c"> <span>Gano músculo lentamente, pero también acumulo grasa fácilmente si no me cuido.</span></label>
+                </div>
+            </div>
+            <div class="question">
+                <p>6. ¿Cómo manejas el estrés?</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="a"> <span>El estrés me afecta mucho, a menudo pierdo el apetito y bajo de peso.</span></label>
+                    <label><input type="radio" name="q6" value="b"> <span>Manejo el estrés razonablemente bien, no afecta mucho mi peso.</span></label>
+                    <label><input type="radio" name="q6" value="c"> <span>El estrés me hace comer más y tiendo a ganar peso cuando estoy estresado.</span></label>
+                </div>
+            </div>
+            <div class="question">
+                <p>7. ¿Cómo es tu tolerancia al frío?</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="a"> <span>Siempre tengo frío, necesito capas extra de ropa.</span></label>
+                    <label><input type="radio" name="q7" value="b"> <span>Tolerancia normal al frío, me adapto bien a diferentes temperaturas.</span></label>
+                    <label><input type="radio" name="q7" value="c"> <span>Raramente tengo frío, tiendo a tener calor más frecuentemente.</span></label>
+                </div>
+            </div>
+            <div class="question">
+                <p>8. ¿Cómo es tu personalidad en general?</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="a"> <span>Intenso, ansioso, me gusta la variedad y los cambios.</span></label>
+                    <label><input type="radio" name="q8" value="b"> <span>Determinado, competitivo, me gusta tomar liderazgo.</span></label>
+                    <label><input type="radio" name="q8" value="c"> <span>Tranquilo, paciente, no me gustan los cambios bruscos.</span></label>
+                </div>
+            </div>
+            <div class="question">
+                <p>9. ¿Qué pasa cuando te saltas comidas?</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="a"> <span>Me siento mareado, irritable o ansioso rápidamente.</span></label>
+                    <label><input type="radio" name="q9" value="b"> <span>Puedo manejar saltar comidas ocasionalmente sin problemas mayores.</span></label>
+                    <label><input type="radio" name="q9" value="c"> <span>Puedo pasar largos períodos sin comer sin sentir molestias.</span></label>
+                </div>
+            </div>
+            <div class="question">
+                <p>10. ¿Cómo es tu digestión?</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="a"> <span>Digestión rápida e irregular, a veces con gases o malestar.</span></label>
+                    <label><input type="radio" name="q10" value="b"> <span>Digestión fuerte y eficiente, puedo comer casi cualquier cosa.</span></label>
+                    <label><input type="radio" name="q10" value="c"> <span>Digestión lenta y pesada, especialmente con comidas grandes.</span></label>
+                </div>
+            </div>
+
+            <button type="submit">Obtener Mi Tipo de Metabolismo</button>
+        </form>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('metabolism-test');
+            form.addEventListener('submit', handleSubmit);
+        });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const answers = {};
+            let totalQuestions = 10;
+            let answeredQuestions = 0;
+            
+            // Collect answers
+            for (let i = 1; i <= totalQuestions; i++) {
+                const answer = formData.get(`q${i}`);
+                if (answer) {
+                    answers[`q${i}`] = answer;
+                    answeredQuestions++;
+                }
+            }
+            
+            if (answeredQuestions < totalQuestions) {
+                alert('Por favor, responde todas las preguntas para obtener un resultado preciso.');
+                return;
+            }
+            
+            const result = calculateMetabolismType(answers);
+            displayResults(result);
+        }
+
+        function calculateMetabolismType(answers) {
+            let aCount = 0, bCount = 0, cCount = 0;
+            
+            Object.values(answers).forEach(answer => {
+                if (answer === 'a') aCount++;
+                else if (answer === 'b') bCount++;
+                else if (answer === 'c') cCount++;
+            });
+            
+            let dominantType, percentage;
+            
+            if (aCount >= bCount && aCount >= cCount) {
+                dominantType = 'ectomorfo';
+                percentage = Math.round((aCount / 10) * 100);
+            } else if (bCount >= aCount && bCount >= cCount) {
+                dominantType = 'mesomorfo';
+                percentage = Math.round((bCount / 10) * 100);
+            } else {
+                dominantType = 'endomorfo';
+                percentage = Math.round((cCount / 10) * 100);
+            }
+            
+            return {
+                type: dominantType,
+                percentage: percentage,
+                scores: { ectomorfo: aCount, mesomorfo: bCount, endomorfo: cCount }
+            };
+        }
+
+        function displayResults(result) {
+            const resultsDiv = document.getElementById('results');
+            
+            let content = '';
+            
+            if (result.type === 'ectomorfo') {
+                content = `
+                    <h2>🏃‍♂️ Tu Tipo de Metabolismo: ECTOMORFO (${result.percentage}%)</h2>
+                    <h3>Características principales:</h3>
+                    <ul>
+                        <li>Metabolismo muy rápido</li>
+                        <li>Estructura corporal delgada y alargada</li>
+                        <li>Dificultad para ganar peso y músculo</li>
+                        <li>Tolerancia baja al frío</li>
+                        <li>Digestión rápida e irregular</li>
+                        <li>Personalidad intensa y enérgica</li>
+                    </ul>
+                    
+                    <h3>🍽️ Recomendaciones nutricionales:</h3>
+                    <ul>
+                        <li>Come frecuentemente (5-6 comidas pequeñas al día)</li>
+                        <li>Incrementa el consumo de carbohidratos complejos</li>
+                        <li>Incluye grasas saludables en cada comida</li>
+                        <li>Consume proteína de calidad en cada comida</li>
+                        <li>Evita el ayuno prolongado</li>
+                    </ul>
+                    
+                    <h3>💪 Entrenamiento recomendado:</h3>
+                    <ul>
+                        <li>Enfócate en entrenamiento de fuerza con pesos</li>
+                        <li>Sesiones más cortas pero intensas</li>
+                        <li>Limita el cardio excesivo</li>
+                        <li>Descansa adecuadamente entre entrenamientos</li>
+                    </ul>
+                    
+                    <h3>🌿 Suplementos naturales recomendados:</h3>
+                    <ul>
+                        <li>Proteína en polvo para aumentar masa muscular</li>
+                        <li>Aceites de alta calidad (omega-3)</li>
+                        <li>Vitaminas del complejo B para energía</li>
+                        <li>Enzimas digestivas para mejor absorción</li>
+                    </ul>
+                `;
+            } else if (result.type === 'mesomorfo') {
+                content = `
+                    <h2>💪 Tu Tipo de Metabolismo: MESOMORFO (${result.percentage}%)</h2>
+                    <h3>Características principales:</h3>
+                    <ul>
+                        <li>Metabolismo equilibrado y eficiente</li>
+                        <li>Estructura corporal atlética y muscular</li>
+                        <li>Facilidad para ganar músculo y perder grasa</li>
+                        <li>Buena tolerancia al ejercicio</li>
+                        <li>Digestión fuerte y eficiente</li>
+                        <li>Personalidad competitiva y determinada</li>
+                    </ul>
+                    
+                    <h3>🍽️ Recomendaciones nutricionales:</h3>
+                    <ul>
+                        <li>Dieta balanceada con todos los macronutrientes</li>
+                        <li>Proteína moderada-alta (1.6-2.2g por kg de peso)</li>
+                        <li>Carbohidratos principalmente alrededor del entrenamiento</li>
+                        <li>Grasas saludables en moderación</li>
+                        <li>Flexibilidad en los horarios de comida</li>
+                    </ul>
+                    
+                    <h3>💪 Entrenamiento recomendado:</h3>
+                    <ul>
+                        <li>Combinación de entrenamiento de fuerza y cardio</li>
+                        <li>Variedad en rutinas de ejercicio</li>
+                        <li>Intensidad moderada a alta</li>
+                        <li>Respuesta rápida al entrenamiento</li>
+                    </ul>
+                    
+                    <h3>🌿 Suplementos naturales recomendados:</h3>
+                    <ul>
+                        <li>Proteína para mantener masa muscular</li>
+                        <li>Creatina para rendimiento</li>
+                        <li>Antioxidantes para recuperación</li>
+                        <li>Multivitamínico para soporte general</li>
+                    </ul>
+                `;
+            } else {
+                content = `
+                    <h2>🧘‍♀️ Tu Tipo de Metabolismo: ENDOMORFO (${result.percentage}%)</h2>
+                    <h3>Características principales:</h3>
+                    <ul>
+                        <li>Metabolismo más lento</li>
+                        <li>Estructura corporal más robusta y redondeada</li>
+                        <li>Facilidad para ganar peso, dificultad para perderlo</li>
+                        <li>Buena tolerancia al frío</li>
+                        <li>Digestión lenta</li>
+                        <li>Personalidad tranquila y paciente</li>
+                    </ul>
+                    
+                    <h3>🍽️ Recomendaciones nutricionales:</h3>
+                    <ul>
+                        <li>Controla las porciones y cuenta calorías</li>
+                        <li>Reduce carbohidratos simples y azúcares</li>
+                        <li>Aumenta el consumo de proteína magra</li>
+                        <li>Incluye muchas verduras y fibra</li>
+                        <li>Come menos frecuentemente (3-4 comidas)</li>
+                    </ul>
+                    
+                    <h3>💪 Entrenamiento recomendado:</h3>
+                    <ul>
+                        <li>Prioriza el cardio para quemar grasa</li>
+                        <li>Entrenamiento de resistencia para mantener músculo</li>
+                        <li>Sesiones más largas y frecuentes</li>
+                        <li>Actividades de baja intensidad pero constantes</li>
+                    </ul>
+                    
+                    <h3>🌿 Suplementos naturales recomendados:</h3>
+                    <ul>
+                        <li>Té verde y otros termogénicos naturales</li>
+                        <li>Fibra para saciedad</li>
+                        <li>L-carnitina para metabolismo de grasas</li>
+                        <li>Cromo para control de glucosa</li>
+                    </ul>
+                `;
+            }
+            
+            content += `
+                <hr style="margin: 30px 0; border: 1px solid #2d5a27;">
+                <p style="text-align: center; font-style: italic; color: #5a8a52;">
+                    <strong>Nota:</strong> Este test es una herramienta orientativa. Los tipos de cuerpo puros son raros; 
+                    la mayoría de las personas tienen características mixtas. Consulta con un profesional de la salud 
+                    para un plan personalizado.
+                </p>
+            `;
+            
+            resultsDiv.innerHTML = content;
+            resultsDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    </script>
+</body>
+</html>

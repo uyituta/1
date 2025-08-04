@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Hígado Graso - Natural Center of Urology</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
+            color: #333;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #2d5a27;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .header p {
+            color: #5a8a52;
+            font-style: italic;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid #5a8a52;
+        }
+        
+        h1, h2 {
+            color: #2d5a27;
+            text-align: center;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #e8f5e8;
+            border-radius: 10px;
+            color: #2d5a27;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            background-color: #f8fffe;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e8f5e8;
+            transition: all 0.3s ease;
+        }
+        
+        .question:hover {
+            border-color: #5a8a52;
+        }
+        
+        .question p {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d5a27;
+            font-size: 1.1em;
+        }
+        
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 12px;
+            background: white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid #e8f5e8;
+        }
+        
+        .options label:hover {
+            background: #e8f5e8;
+            transform: translateX(5px);
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #2d5a27, #5a8a52);
+            color: white;
+            padding: 18px 35px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(135deg, #5a8a52, #2d5a27);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(45, 90, 39, 0.3);
+        }
+        
+        .result {
+            display: none;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid;
+            font-size: 1.1em;
+        }
+        
+        .result-low {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #2d5a27;
+            border-color: #5a8a52;
+        }
+        
+        .result-medium {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            color: #856404;
+            border-color: #f39c12;
+        }
+        
+        .result-high {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+            border-color: #e74c3c;
+        }
+        
+        .disclaimer {
+            margin-top: 30px;
+            font-size: 0.95em;
+            color: #5a8a52;
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #2d5a27;
+        }
+        
+        .disclaimer strong {
+            color: #2d5a27;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #2d5a27;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-button:hover {
+            background: #3d6a37;
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .question {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Volver</a>
+    
+    <div class="header">
+        <h1>Natural Center of Urology</h1>
+        <p>Test de Orientación sobre Hígado Graso</p>
+    </div>
+
+    <div class="container">
+        <h1>Test de Orientación sobre Hígado Graso</h1>
+        <p class="intro">Responde a las siguientes preguntas para evaluar tus posibles factores de riesgo de enfermedad del hígado graso. Este test es solo una guía y no sustituye la opinión de un profesional de la salud.</p>
+
+        <form id="fattyLiverTest">
+            <div class="question">
+                <p>1. ¿Tienes sobrepeso u obesidad (un Índice de Masa Corporal superior a 25)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="1" required> Sí</label>
+                    <label><input type="radio" name="q1" value="0"> No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>2. ¿Acumulas grasa principalmente en la zona del abdomen?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="1" required> Sí</label>
+                    <label><input type="radio" name="q2" value="0"> No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>3. ¿Has sido diagnosticado con diabetes tipo 2 o resistencia a la insulina?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="2" required> Sí</label>
+                    <label><input type="radio" name="q3" value="0"> No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>4. ¿Tienes niveles altos de colesterol o triglicéridos en la sangre?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="2" required> Sí</label>
+                    <label><input type="radio" name="q4" value="0"> No</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>5. ¿Padeces de hipertensión arterial (presión alta)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="1" required> Sí</label>
+                    <label><input type="radio" name="q5" value="0"> No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>6. ¿Consumes bebidas azucaradas (refrescos, jugos industriales) varias veces a la semana?</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="1" required> Sí</label>
+                    <label><input type="radio" name="q6" value="0"> No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>7. ¿Tu dieta se basa con frecuencia en alimentos procesados, fritos o comida rápida?</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="1" required> Sí</label>
+                    <label><input type="radio" name="q7" value="0"> No</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>8. ¿Llevas un estilo de vida mayormente sedentario (poca o ninguna actividad física)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="1" required> Sí</label>
+                    <label><input type="radio" name="q8" value="0"> No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>9. ¿Consumes alcohol de manera regular (más de 2-3 veces por semana)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="2" required> Sí, regularmente</label>
+                    <label><input type="radio" name="q9" value="1"> Ocasionalmente</label>
+                    <label><input type="radio" name="q9" value="0"> No consumo alcohol</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>10. ¿Has experimentado fatiga o cansancio persistente sin causa aparente?</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="1" required> Sí</label>
+                    <label><input type="radio" name="q10" value="0"> No</label>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <button type="submit" class="btn">Evaluar Resultado</button>
+            </div>
+        </form>
+
+        <div id="result" class="result">
+            <h2 id="resultTitle"></h2>
+            <div id="resultContent"></div>
+        </div>
+
+        <div class="disclaimer">
+            <p><strong>Importante:</strong> Este test es solo una herramienta de orientación y no reemplaza una consulta médica profesional. Si tienes preocupaciones sobre tu salud hepática, consulta con un médico especialista para una evaluación completa.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('fattyLiverTest');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateResults();
+            });
+        });
+
+        function calculateResults() {
+            const form = document.getElementById('fattyLiverTest');
+            const formData = new FormData(form);
+            
+            let totalScore = 0;
+            const totalQuestions = 10;
+            let answeredQuestions = 0;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const answer = formData.get(`q${i}`);
+                if (answer) {
+                    answeredQuestions++;
+                    totalScore += parseInt(answer);
+                }
+            }
+            
+            if (answeredQuestions < totalQuestions) {
+                alert('Por favor, responde todas las preguntas para obtener un resultado preciso.');
+                return;
+            }
+            
+            let riskLevel, resultClass, recommendations;
+            
+            if (totalScore <= 3) {
+                riskLevel = 'BAJO';
+                resultClass = 'result-low';
+                recommendations = `
+                    <h3>✅ Riesgo Bajo - Salud Hepática Óptima</h3>
+                    <p><strong>Tu puntuación: ${totalScore}/16 puntos</strong></p>
+                    
+                    <div class="recommendations">
+                        <h4>🎯 Recomendaciones para mantener tu salud hepática:</h4>
+                        <ul>
+                            <li>✅ Mantén una dieta equilibrada rica en frutas y verduras</li>
+                            <li>✅ Continúa con el ejercicio regular</li>
+                            <li>✅ Mantén un peso saludable</li>
+                            <li>✅ Limita el consumo de alcohol</li>
+                            <li>✅ Evita alimentos procesados y bebidas azucaradas</li>
+                        </ul>
+                        
+                        <h4>🌿 Productos naturales recomendados:</h4>
+                        <p>Nuestros suplementos naturales pueden ayudarte a mantener este excelente estado de salud hepática.</p>
+                    </div>
+                `;
+            } else if (totalScore <= 8) {
+                riskLevel = 'MODERADO';
+                resultClass = 'result-medium';
+                recommendations = `
+                    <h3>⚠️ Riesgo Moderado - Atención Requerida</h3>
+                    <p><strong>Tu puntuación: ${totalScore}/16 puntos</strong></p>
+                    
+                    <div class="recommendations">
+                        <h4>🎯 Recomendaciones importantes:</h4>
+                        <ul>
+                            <li>⚠️ Consulta con un médico para evaluación más detallada</li>
+                            <li>🥗 Mejora tu dieta: reduce grasas saturadas y azúcares</li>
+                            <li>🏃‍♂️ Incrementa la actividad física gradualmente</li>
+                            <li>💧 Aumenta el consumo de agua</li>
+                            <li>🚭 Elimina o reduce significativamente el alcohol</li>
+                            <li>😴 Mejora la calidad del sueño</li>
+                        </ul>
+                        
+                        <h4>🌿 Tratamiento natural recomendado:</h4>
+                        <p>Nuestros productos con cardo mariano, alcachofa y otros hepatoprotectores naturales pueden ayudar a mejorar tu salud hepática.</p>
+                        
+                        <div class="urgent-note">
+                            <p><strong>📞 Recomendamos una consulta médica dentro de 2-4 semanas.</strong></p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                riskLevel = 'ALTO';
+                resultClass = 'result-high';
+                recommendations = `
+                    <h3>🚨 Riesgo Alto - Atención Médica Urgente</h3>
+                    <p><strong>Tu puntuación: ${totalScore}/16 puntos</strong></p>
+                    
+                    <div class="recommendations">
+                        <h4>🚨 Acciones inmediatas requeridas:</h4>
+                        <ul>
+                            <li>🏥 <strong>URGENTE:</strong> Consulta con un gastroenterólogo o hepatólogo</li>
+                            <li>🔬 Solicita exámenes: perfil hepático completo, ecografía</li>
+                            <li>💊 Considera tratamiento médico bajo supervisión</li>
+                            <li>🥗 Cambios dietéticos inmediatos y drásticos</li>
+                            <li>🚫 Eliminación total del alcohol</li>
+                            <li>📊 Monitoreo regular de enzimas hepáticas</li>
+                        </ul>
+                        
+                        <h4>🌿 Apoyo con productos naturales:</h4>
+                        <p>Mientras recibes atención médica, nuestros productos naturales pueden servir como complemento al tratamiento profesional.</p>
+                        
+                        <div class="urgent-note">
+                            <p><strong>📞 IMPORTANTE: Programa una cita médica dentro de 1-2 semanas máximo.</strong></p>
+                            <p><strong>🚨 Si experimentas dolor abdominal intenso, ictericia o fatiga extrema, busca atención médica inmediata.</strong></p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const resultDiv = document.getElementById('result');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultDiv.className = `result ${resultClass}`;
+            resultTitle.textContent = `Resultado: Riesgo ${riskLevel}`;
+            resultContent.innerHTML = recommendations;
+            
+            resultDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    </script>
+</body>
+</html>
