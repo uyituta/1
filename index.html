@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Center of Urology</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Natural Center of Urology</h1>
+                <p>Tu salud natural es nuestra prioridad</p>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                <span class="cart-symbol">🛒</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#" onclick="toggleMegaMenu('quienes-somos')">Quiénes Somos</a></li>
+                <li><a href="#" onclick="toggleMegaMenu('contactanos')">Contáctanos</a></li>
+                <li class="dropdown">
+                    <a href="#" onclick="toggleMegaMenu('productos')">Productos</a>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="showProductSection('gomitas')">Gomitas</a>
+                        <a href="#" onclick="showProductSection('capsulas')">Cápsulas y Tabletas</a>
+                        <a href="#" onclick="showProductSection('suplementos')">Suplementos y Harinas</a>
+                    </div>
+                </li>
+                <li><a href="#" onclick="toggleMegaMenu('prevenciones')">Prevenciones</a></li>
+                <li><a href="#" onclick="toggleMegaMenu('promociones')">Promociones</a></li>
+                <li><a href="#" onclick="toggleMegaMenu('tests')">Tests Médicos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Carrito de Compras</h3>
+                <span class="close" onclick="toggleCart()">&times;</span>
+            </div>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-total">
+                <p>Total: S/. <span id="cartTotal">0</span></p>
+            </div>
+            <div class="cart-actions">
+                <button onclick="clearCart()" class="btn-clear">Vaciar Carrito</button>
+                <button onclick="showPaymentOptions()" class="btn-checkout">Proceder al Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="payment-modal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <h3>Opciones de Pago</h3>
+                <span class="close" onclick="closePaymentModal()">&times;</span>
+            </div>
+            <div class="payment-options">
+                <div class="payment-option" onclick="showPaymentDetails('bcp')">
+                    <h4>Opción 1: BCP</h4>
+                    <p>Transferencia bancaria</p>
+                </div>
+                <div class="payment-option" onclick="showPaymentDetails('interbancaria')">
+                    <h4>Opción 2: Interbancaria</h4>
+                    <p>Transferencia interbancaria</p>
+                </div>
+                <div class="payment-option" onclick="showPaymentDetails('yape')">
+                    <h4>Opción 3: Yape</h4>
+                    <p>Pago móvil</p>
+                </div>
+            </div>
+            <div id="paymentDetails" class="payment-details"></div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="product-modal">
+        <div class="product-modal-content">
+            <div class="product-modal-header">
+                <h3>Detalles del Producto</h3>
+                <span class="close" onclick="closeProductModal()">&times;</span>
+            </div>
+            <div id="productDetails" class="product-details"></div>
+        </div>
+    </div>
+
+    <!-- MCU Chatbot -->
+    <div id="chatbot-icon" class="chatbot-icon">
+        <span class="chatbot-emoji">🤖</span>
+        <span class="chatbot-text">MCU</span>
+    </div>
+
+    <div id="chatbot-container" class="chatbot-container hidden">
+        <div class="chatbot-header">
+            <h3>MCU - Asesor de Salud Natural</h3>
+            <button id="close-chatbot" class="close-chatbot">&times;</button>
+        </div>
+        <div id="chat-window" class="chat-window">
+            <div class="message bot-message">
+                ¡Hola! Soy MCU, tu asesor personal de salud natural. ¿En qué puedo ayudarte hoy? Te invito a explorar nuestros productos naturales y realizar nuestros tests de salud.
+            </div>
+        </div>
+        <form id="chat-form" class="chat-form">
+            <input type="text" id="message-input" placeholder="Escribe tu consulta aquí..." required>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Megamenu Sections -->
+            <div id="megamenu-quienes-somos" class="megamenu">
+                <div class="megamenu-content">
+                    <h2>Quiénes Somos</h2>
+                    <div class="content-box">
+                        <p><strong>Natural Center of Urology</strong> es una empresa dedicada a la venta en línea de productos naturales para el cuidado de la salud prostática y urológica, comprometida con el bienestar integral de las personas a través de soluciones 100% naturales, libres de fármacos, químicos sintéticos y componentes artificiales.</p>
+                        
+                        <h3>¿Qué ofrecemos?</h3>
+                        <ul>
+                            <li><strong>Productos naturales de alta calidad</strong>: Suplementos especializados, hierbas medicinales, aceites esenciales, productos orgánicos y otros remedios basados en la medicina tradicional y alternativas naturales para la salud prostática.</li>
+                            <li><strong>Enfoque holístico</strong>: Promovemos un estilo de vida saludable, combinando nutrición especializada, terapias naturales y prevención sin depender de fármacos convencionales.</li>
+                            <li><strong>Seguridad y confianza</strong>: Todos nuestros productos están elaborados con ingredientes puros, certificados y respaldados por procesos de producción éticos y sostenibles.</li>
+                            <li><strong>Tests médicos especializados</strong>: Ofrecemos evaluaciones de salud prostática, hígado graso, metabolismo y deficiencias nutricionales.</li>
+                        </ul>
+
+                        <h3>Nuestra filosofía</h3>
+                        <p>Creemos en el poder de la naturaleza para restaurar y mantener la salud prostática y urológica. Nuestra misión es brindar alternativas efectivas, seguras y accesibles para quienes buscan un enfoque más natural y preventivo en su cuidado personal.</p>
+
+                        <h3>¿Por qué elegirnos?</h3>
+                        <ul class="benefits-list">
+                            <li>✅ <strong>Calidad garantizada</strong>: Seleccionamos rigurosamente cada producto.</li>
+                            <li>✅ <strong>Sin químicos dañinos</strong>: Libre de aditivos artificiales y efectos secundarios.</li>
+                            <li>✅ <strong>Educación en salud</strong>: Acompañamos a nuestros clientes con información veraz sobre el uso de remedios naturales.</li>
+                            <li>✅ <strong>Especialización urológica</strong>: Enfoque específico en la salud prostática y del sistema urinario.</li>
+                        </ul>
+
+                        <p class="closing-message">En <strong>Natural Center of Urology</strong>, tu salud es lo primero, ¡de la mano de la naturaleza! 🌿</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="megamenu-contactanos" class="megamenu">
+                <div class="megamenu-content">
+                    <h2>Contáctanos</h2>
+                    <div class="content-box">
+                        <h3>Tenemos Oportunidades para Emprendedores</h3>
+                        <p>¿Estás interesado en formar parte de nuestra red de distribuidores? En Natural Center of Urology ofrecemos excelentes oportunidades de negocio para personas emprendedoras que deseen comercializar nuestros productos naturales de alta calidad.</p>
+                        
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <h4>📧 Email</h4>
+                                <p>info@naturalcenterofurology.com</p>
+                            </div>
+                            <div class="contact-item">
+                                <h4>📱 WhatsApp</h4>
+                                <p>+51 934 347 417</p>
+                            </div>
+                            <div class="contact-item">
+                                <h4>⏰ Horarios de Atención</h4>
+                                <p>Lunes a Viernes: 9:00 AM - 6:00 PM<br>Sábados: 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="megamenu-productos" class="megamenu">
+                <div class="megamenu-content">
+                    <h2>Nuestros Productos</h2>
+                    
+                    <!-- Product Filters -->
+                    <div class="product-filters">
+                        <button class="filter-btn active" onclick="showProductSection('gomitas')">Gomitas</button>
+                        <button class="filter-btn" onclick="showProductSection('capsulas')">Cápsulas y Tabletas</button>   
+						<button class="filter-btn" onclick="showProductSection('suplementos')">Suplementos y Harina</button>    						
+                    </div>
+
+                    <!-- Gomitas Subsection -->
+                    <div id="gomitas-section" class="product-subsection">
+                        <h3>Gomitas Naturales</h3>
+                        <div class="product-grid" id="gomitas-grid"></div>
+                    </div>
+
+                    <!-- Capsulas Subsection -->
+                    <div id="capsulas-section" class="product-subsection" style="display: none;">
+                        <h3>Cápsulas y Tabletas</h3>
+                        <div class="product-grid" id="capsulas-grid"></div>
+                    </div>
+
+                    <!-- Suplementos Subsection -->
+                    <div id="suplementos-section" class="product-subsection" style="display: none;">
+                        <h3>Suplementos y Harinas</h3>
+                        <div class="product-grid" id="suplementos-grid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="megamenu-prevenciones" class="megamenu">
+                <div class="megamenu-content">
+                    <h2>Prevenciones</h2>
+                    <div class="content-box">
+                        <div class="video-container">
+                            <video controls width="100%" height="400">
+                                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento video.
+                            </video>
+                        </div>
+                        
+                        <div class="prevention-tips">
+                            <h3>Consejos para Prevenir Enfermedades Prostáticas</h3>
+                            <div class="tips-grid">
+                                <div class="tip-card">
+                                    <h4>💧 Hidratación Adecuada</h4>
+                                    <p>Bebe al menos 8 vasos de agua al día, pero evita excesos antes de dormir para reducir la frecuencia urinaria nocturna.</p>
+                                </div>
+                                <div class="tip-card">
+                                    <h4>🥗 Dieta Saludable</h4>
+                                    <p>Consume alimentos ricos en zinc, vitamina E y licopeno. Incluye tomates, brócoli, nueces y pescado graso.</p>
+                                </div>
+                                <div class="tip-card">
+                                    <h4>🏃‍♂️ Ejercicio Regular</h4>
+                                    <p>Realiza actividad física moderada. Los ejercicios de Kegel pueden fortalecer los músculos del suelo pélvico.</p>
+                                </div>
+                                <div class="tip-card">
+                                    <h4>😴 Descanso Adecuado</h4>
+                                    <p>Duerme entre 7-8 horas diarias. Un buen descanso ayuda a mantener el equilibrio hormonal.</p>
+                                </div>
+                                <div class="tip-card">
+                                    <h4>🧘‍♂️ Manejo del Estrés</h4>
+                                    <p>Practica técnicas de relajación. El estrés crónico puede afectar la salud prostática.</p>
+                                </div>
+                                <div class="tip-card">
+                                    <h4>🩺 Revisiones Médicas</h4>
+                                    <p>Realiza chequeos preventivos anuales. La detección temprana es clave para la salud prostática.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="megamenu-promociones" class="megamenu">
+                <div class="megamenu-content">
+                    <h2>Promociones Especiales</h2>
+                    <div class="content-box">
+                        <div class="promotions-grid">
+                            <div class="promotion-card featured">
+                                <div class="promotion-badge">¡OFERTA ESPECIAL!</div>
+                                <h3>🎉 Pack Salud Completa</h3>
+                                <div class="promotion-price">
+                                    <span class="old-price">S/. 180</span>
+                                    <span class="new-price">S/. 129</span>
+                                </div>
+                                <ul class="promotion-includes">
+                                    <li>✅ 3 Productos a tu elección</li>
+                                    <li>✅ Envío gratis a todo el Perú</li>
+                                    <li>✅ Consulta nutricional incluida</li>
+                                    <li>✅ Descuento del 28%</li>
+                                </ul>
+                                <button class="btn-promotion">¡Aprovechar Oferta!</button>
+                            </div>
+
+                            <div class="promotion-card">
+                                <h3>🚚 Envío Gratis</h3>
+                                <p>En compras mayores a S/. 80 en Lima y S/. 120 en provincias</p>
+                                <div class="promotion-code">
+                                    <span>Código: <strong>ENVIOGRATIS</strong></span>
+                                </div>
+                            </div>
+
+                            <div class="promotion-card">
+                                <h3>💰 Descuento por Cantidad</h3>
+                                <div class="quantity-discounts">
+                                    <div class="discount-tier">
+                                        <span class="quantity">2 productos</span>
+                                        <span class="discount">5% descuento</span>
+                                    </div>
+                                    <div class="discount-tier">
+                                        <span class="quantity">3 productos</span>
+                                        <span class="discount">10% descuento</span>
+                                    </div>
+                                    <div class="discount-tier">
+                                        <span class="quantity">5+ productos</span>
+                                        <span class="discount">15% descuento</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="promotion-card">
+                                <h3>🎁 Cliente Nuevo</h3>
+                                <p>10% de descuento en tu primera compra</p>
+                                <div class="promotion-code">
+                                    <span>Código: <strong>NUEVO10</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="megamenu-tests" class="megamenu">
+                <div class="megamenu-content">
+                    <h2>Tests de Salud Especializado</h2>
+                    <div class="content-box">
+                        <p class="tests-intro">Nuestros tests especializados te ayudan a identificar necesidades específicas de tu organismo para recomendarte los productos más adecuados para tu salud.</p>
+                        
+                        <div class="tests-grid">
+                            <div class="test-card" onclick="window.open('test-prostatico.html', '_blank')">
+                                <div class="test-icon">
+                                    <span class="test-emoji">🩺</span>
+                                </div>
+                                <h4>Test Prostático</h4>
+                                <p>Evaluación completa de tu salud prostática y sistema urológico</p>
+                                <ul class="test-features">
+                                    <li>✓ 15 preguntas especializadas</li>
+                                    <li>✓ Análisis de síntomas</li>
+                                    <li>✓ Recomendaciones personalizadas</li>
+                                </ul>
+                                <button class="test-btn">Realizar Test</button>
+                            </div>
+
+                            <div class="test-card" onclick="window.open('test-higado.html', '_blank')">
+                                <div class="test-icon">
+                                    <span class="test-emoji">🫁</span>
+                                </div>
+                                <h4>Test de Hígado Graso</h4>
+                                <p>Detecta signos de hígado graso y mejora tu salud hepática</p>
+                                <ul class="test-features">
+                                    <li>✓ Evaluación de factores de riesgo</li>
+                                    <li>✓ Síntomas tempranos</li>
+                                    <li>✓ Plan de recuperación natural</li>
+                                </ul>
+                                <button class="test-btn">Realizar Test</button>
+                            </div>
+
+                            <div class="test-card" onclick="window.open('test-metabolismo.html', '_blank')">
+                                <div class="test-icon">
+                                    <span class="test-emoji">⚡</span>
+                                </div>
+                                <h4>Test de Metabolismo</h4>
+                                <p>Analiza tu metabolismo y optimiza tu energía natural</p>
+                                <ul class="test-features">
+                                    <li>✓ Velocidad metabólica</li>
+                                    <li>✓ Factores hormonales</li>
+                                    <li>✓ Suplementos recomendados</li>
+                                </ul>
+                                <button class="test-btn">Realizar Test</button>
+                            </div>
+
+                            <div class="test-card" onclick="window.open('test-nutrientes.html', '_blank')">
+                                <div class="test-icon">
+                                    <span class="test-emoji">🥗</span>
+                                </div>
+                                <h4>Test de Deficiencias Nutricionales</h4>
+                                <p>Identifica qué nutrientes necesita tu organismo</p>
+                                <ul class="test-features">
+                                    <li>✓ Vitaminas y minerales</li>
+                                    <li>✓ Síntomas de deficiencia</li>
+                                    <li>✓ Suplementación específica</li>
+                                </ul>
+                                <button class="test-btn">Realizar Test</button>
+                            </div>
+                        </div>
+
+                        <div class="tests-benefits">
+                            <h3>Beneficios de Nuestros Tests</h3>
+                            <div class="benefits-grid">
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">🎯</span>
+                                    <h4>Personalización</h4>
+                                    <p>Recomendaciones específicas para tu perfil de salud</p>
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">⏱️</span>
+                                    <h4>Rapidez</h4>
+                                    <p>Resultados inmediatos en menos de 5 minutos</p>
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">🔬</span>
+                                    <h4>Base Científica</h4>
+                                    <p>Desarrollados por especialistas en medicina natural</p>
+                                </div>
+                                <div class="benefit-item">
+                                    <span class="benefit-icon">🆓</span>
+                                    <h4>Gratuito</h4>
+                                    <p>Todos nuestros tests son completamente gratuitos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
