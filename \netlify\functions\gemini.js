@@ -32,7 +32,7 @@ exports.handler = async function(event, context) {
   // Configurar CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, X-Amz-Date, Authorization, X-Api-Key, X-Amz-Security-Token',
     'Access-Control-Allow-Methods': 'POST, OPTIONS'
   };
 
@@ -45,7 +45,7 @@ exports.handler = async function(event, context) {
     };
   }
 
-  // Solo procesamos peticiones POST
+  // A partir de aquí, solo se procesan las peticiones POST
   if (event.httpMethod !== 'POST') {
     return { 
       statusCode: 405, 
